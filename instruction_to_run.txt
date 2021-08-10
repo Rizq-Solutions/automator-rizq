@@ -1,0 +1,11 @@
+1. To run open terminal at the GeneratorTool folder and execute below command
+	dotnet NodeJSAPIGeneratorMac.dll
+
+2. Register your tool for first time. Follow terminal command instructions
+
+3. Video : https://www.youtube.com/watch?v=FhQSCA9wLgs
+
+Not requried but it dotnet command does not work then install dotnet core 2.1 version
+from this link : https://docs.microsoft.com/en-us/dotnet/core/install/macos
+
+Search for stackoverflow "how to run dotnet command in macos"

@@ -1,0 +1,117 @@
+﻿'user strict';
+var sql = require('./newdb.js');
+var url = require('url');
+var helper = require('./helper');
+//{modelName} object constructor
+
+var {modelName} = function(req,{tableName}){
+    {propertyList}
+};
+{modelName}.create = function (req,new{modelName}, result) {    
+        sql.query("{insertQuery}",new{modelName}, function (err, res) {
+                
+                if(err) {
+                    console.log("error: ", err);
+                    result(err, null);
+                }
+                else{
+                    console.log(res.insertId);
+                    result(null, res.insertId);
+                }
+            });           
+};
+{modelName}.getById = function (req,{primaryKey}, result) {
+        sql.query("{selectByIdQuery}", {primaryKey}, function (err, res) {             
+                if(err) {
+                    console.log("error: ", err);
+                    result(err, null);
+                }
+                else if(res && res.length>0){
+                    result(null, res);
+              
+                }else{
+                    result("Record Not Found", null);
+                }
+            });   
+};
+{modelName}.totalCount = function (req,result) {
+        sql.query("{selectAllRecordCountQuery}", function (err, res) {             
+                if(err) {
+                    console.log("error: ", err);
+                    result(err, null);
+                }
+                else{
+                    result(null, res);
+              
+                }
+            });   
+};
+
+{modelName}.totalSearchCount = function (req,searchKey,result) {
+        sql.query("{searchRecordCountQuery}", function (err, res) {             
+                if(err) {
+                    console.log("error: ", err);
+                    result(err, null);
+                }
+                else{
+                    result(null, res);
+              
+                }
+            });   
+};
+
+{modelName}.getAll = function (req,offset,pageSize,result) {
+        sql.query("{selectAllQuery}",[offset,pageSize],function (err, res) {
+
+                if(err) {
+                    console.log("error: ", err);
+                    result(null, err);
+                }
+                else{
+                  console.log('{tableName} : ', res);  
+
+                 result(null, res);
+                }
+            });   
+};
+{modelName}.search = function (req,searchKey,offset,pageSize,result) {
+
+        sql.query("{selectSearchQuery}",[offset,pageSize],function (err, res) {
+
+                if(err) {
+                    console.log("error: ", err);
+                    result(null, err);
+                }
+                else{
+                  console.log('{tableName} : ', res);  
+
+                 result(null, res);
+                }
+            });   
+};
+{modelName}.updateById = function(req,{primaryKey}, {tableName}, result){
+  sql.query("{updateQuery}",{updateParameter}, function (err, res) {
+          if(err) {
+              console.log("error: ", err);
+                result(null, err);
+             }
+           else{   
+             result(null, res);
+                }
+            }); 
+};
+{modelName}.remove = function(req,{primaryKey}, result){
+     sql.query("{deleteQuery}",[{primaryKey}], function (err, res) {
+
+                if(err) {
+                    console.log("error: ", err);
+                    result(null, err);
+                }
+                else{
+               
+                 result(null, res);
+                }
+            }); 
+};
+
+module.exports= {modelName};

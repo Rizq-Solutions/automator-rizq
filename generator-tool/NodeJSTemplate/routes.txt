@@ -1,0 +1,16 @@
+﻿'use strict';
+module.exports = function(app) {
+  var {tableName}Instance = require('../controllers/{controllerName}');
+
+  app.route('/{tableName}')
+    .get({tableName}Instance.listAll)
+    .post({tableName}Instance.createNew);
+   
+   app.route('/{tableName}/:{primaryKey}')
+    .get({tableName}Instance.readById)
+    .put({tableName}Instance.updateById)
+    .delete({tableName}Instance.deleteById);
+
+	app.route('/{tableName}/search/:searchKey')
+    .get({tableName}Instance.search);
+    };
